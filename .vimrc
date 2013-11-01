@@ -69,6 +69,11 @@ autocmd BufEnter * call CHANGE_CURR_DIR()
 set t_Co=256
 lan en_US.UTF-8
 "autocmd! bufwritepost $HOME/.vimrc source %
+set tags+=/Applications/QT/5.1.1/clang_64/include/tags
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""The-NERD-tree"""""""""""""""""""
 map <F10> :NERDTreeToggle<CR>
@@ -125,6 +130,8 @@ Bundle 'SuperTab'
 Bundle 'Emmet.vim'
 Bundle 'c.vim'
 Bundle 'VimExplorer'
+Bundle 'cpp.vim'
+Bundle 'OmniCppComplete'
 
 """""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
