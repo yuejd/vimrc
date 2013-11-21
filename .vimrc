@@ -37,6 +37,7 @@ set noerrorbells
 set expandtab
 set autoindent
 set smartindent
+set backspace=indent,start
 
 au FileType css,scss,html,vim,javascript setl shiftwidth=4
 au FileType css,scss,html,vim,javascript setl tabstop=4
@@ -68,9 +69,18 @@ autocmd BufEnter * call CHANGE_CURR_DIR()
 
 set t_Co=256
 lan en_US.UTF-8
-"autocmd! bufwritepost $HOME/.vimrc source %
-set tags+=/Applications/QT/5.1.1/clang_64/include/tags
+autocmd FileType c set tags+=/Applications/QT/5.1.1/clang_64/include/tags
 
+"php auto-complete with dictionary
+au FileType php call AddPHPFuncList()
+function AddPHPFuncList()
+    set dictionary-=~/.vim/php/php_funclist.txt dictionary+=~/.vim/php/php_funclist.txt
+    set complete-=k complete+=k
+endfunction
+
+"add phpmanual direction to runtimepath
+autocmd FileType php set runtimepath+=~/.vim/php/vim-php-manual/
+autocmd BufNewFile,Bufread *.module,*.inc,*.php set keywordprg="help"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -109,6 +119,20 @@ let tlist_php_settings = 'php;c:class;i:interfaces;d:constant;f:function'
 """"""""""""""taglist"""""""""""""""""""""""""
 let g:C_Ctrl_j   = 'off'
 
+""""""""""""""OmniCppComplete"""""""""""""""""
+""let OmniCpp_NamespaceSearch = 1
+""let OmniCpp_GlobalScopeSearch = 1
+""let OmniCpp_ShowAccess = 1
+""let OmniCpp_ShowPrototypeInAbbr = 1 
+""let OmniCpp_MayCompleteDot = 1   " after . it will auto complete
+""let OmniCpp_MayCompleteArrow = 1 " after -> it will auto complete
+""let OmniCpp_MayCompleteScope = 1 " after :: it will auto complete
+""let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+""au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+""set completeopt=menuone,menu,longest
+""highlight Pmenu    guibg=darkgrey  guifg=black 
+""highlight PmenuSel guibg=lightgrey guifg=black
+""
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""For vundle"""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -131,7 +155,7 @@ Bundle 'Emmet.vim'
 Bundle 'c.vim'
 Bundle 'VimExplorer'
 Bundle 'cpp.vim'
-Bundle 'OmniCppComplete'
+"Bundle 'OmniCppComplete'
 
 """""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
